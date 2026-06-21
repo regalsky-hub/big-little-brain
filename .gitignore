@@ -1,0 +1,15 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Dependencies (none required, but just in case)
+node_modules/
+
+# Design-tool working files — not part of the website
+screenshots/
+uploads/
+.thumbnail
+big little brain.html

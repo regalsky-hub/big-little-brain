@@ -1,0 +1,174 @@
+/* ============================================================
+   big little brain — design tokens & base styles
+   HeyTea-inspired: paper white, ink line art, calm space
+   ============================================================ */
+
+:root {
+  /* paper + ink */
+  --paper: #FBFAF7;
+  --paper-2: #F4F2EC;
+  --ink: #1C1B19;
+  --ink-soft: #4A4843;
+  --ink-faint: #6B675F;
+  --hair: #E4E0D6;
+  --hair-strong: #D6D1C4;
+
+  /* accent — overridden by Tweaks. default: soft sage */
+  --accent: #5E7C6B;
+  --accent-tint: #EAEFEA;
+  --accent-ink: #2F4438;
+
+  /* brain region colors (from reference diagram, softened) */
+  --r-hippo: #E08A5B;     /* hippocampus / memory — terracotta */
+  --r-temporal: #C9A24B;  /* temporal — gold */
+  --r-parietal: #6E93C4;  /* parietal — blue */
+  --r-frontal: #7FA37E;   /* frontal — green */
+  --r-occipital: #9A86C4; /* occipital — violet */
+
+  --maxw: 1080px;
+  --radius: 14px;
+  --shadow-card: 0 1px 2px rgba(28,27,25,.04), 0 8px 28px -16px rgba(28,27,25,.18);
+
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", "Hanken Grotesk", cursive;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--accent-tint); }
+
+/* ---------- accessibility ---------- */
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.skip-link {
+  position: absolute; left: 12px; top: -64px; z-index: 100;
+  background: var(--ink); color: var(--paper); padding: 11px 18px; border-radius: 10px;
+  font-weight: 700; font-size: 15px; transition: top .15s ease;
+}
+.skip-link:focus { top: 12px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important; scroll-behavior: auto !important;
+  }
+}
+
+h1, h2, h3, h4 { font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+.hand { font-family: var(--font-hand); font-weight: 600; letter-spacing: 0; line-height: 1; }
+
+/* hand-drawn wobble filter applied to line art */
+.wobble { filter: url(#roughen); }
+
+/* ---------- layout helpers ---------- */
+.wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+.row { display: flex; }
+.col { display: flex; flex-direction: column; }
+.gap-s { gap: 10px; } .gap-m { gap: 18px; } .gap-l { gap: 32px; }
+
+/* ---------- top nav ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--hair);
+}
+.nav-inner { display: flex; align-items: center; gap: 8px; height: 68px; }
+.brand { display: flex; align-items: center; gap: 11px; cursor: pointer; margin-right: auto; }
+.brand .mark { width: 36px; height: 36px; flex: none; }
+.brand .word { font-family: var(--font-hand); font-size: 30px; font-weight: 700; line-height: .85; }
+.brand .word small { display: block; font-family: var(--font-sans); font-size: 10.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); margin-top: 3px; white-space: nowrap; }
+
+.nav-links { display: flex; gap: 4px; }
+.nav-link {
+  padding: 9px 15px; border-radius: 999px; font-size: 15px; font-weight: 600;
+  color: var(--ink-soft); cursor: pointer; white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.nav-link:hover { background: var(--paper-2); color: var(--ink); }
+.nav-link.active { background: var(--ink); color: var(--paper); }
+
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; color: var(--ink); }
+
+/* nav utility cluster: text-size control + search */
+.nav-tools { display: flex; align-items: center; gap: 8px; }
+.nav-icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; border: none; background: none; color: var(--ink-soft); cursor: pointer; transition: background .15s, color .15s; }
+.nav-icon-btn:hover { background: var(--paper-2); color: var(--ink); }
+.textsize { display: inline-flex; align-items: center; gap: 1px; padding: 3px; border-radius: 999px; background: var(--paper-2); }
+.ts-btn { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 999px; border: none; background: none; color: var(--ink-soft); cursor: pointer; font-weight: 700; line-height: 1; font-family: var(--font-sans); }
+.ts-btn:hover { color: var(--ink); }
+.ts-btn.on { background: var(--ink); color: var(--paper); }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 9px; cursor: pointer; white-space: nowrap;
+  padding: 13px 22px; border-radius: 999px; border: 1.5px solid var(--ink);
+  background: var(--ink); color: var(--paper); font-size: 15.5px; font-weight: 600;
+  transition: transform .12s, background .15s, color .15s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn.ghost:hover { background: var(--paper-2); }
+
+/* ---------- cards ---------- */
+.card {
+  background: #fff; border: 1px solid var(--hair); border-radius: var(--radius);
+  box-shadow: var(--shadow-card); transition: transform .16s, box-shadow .16s;
+}
+.card.link { cursor: pointer; }
+.card.link:hover { transform: translateY(-3px); box-shadow: 0 1px 2px rgba(28,27,25,.05), 0 18px 40px -20px rgba(28,27,25,.28); }
+
+.eyebrow { font-size: 12.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); }
+.tag { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color: var(--accent-ink); background: var(--accent-tint); padding: 5px 11px; border-radius: 999px; white-space: nowrap; }
+
+/* ---------- sketch frame (HeyTea wobbly border box) ---------- */
+.sketch-box { position: relative; padding: 22px; }
+.sketch-box > svg.frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+/* utilities */
+.center { text-align: center; }
+.muted { color: var(--ink-soft); }
+.faint { color: var(--ink-faint); }
+.divider { height: 1px; background: var(--hair); border: 0; }
+
+/* ---------- responsive ---------- */
+/* collapse the link row into a menu earlier so the text-size + search
+   controls always have room */
+@media (max-width: 1000px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: inline-flex; }
+  .nav-links.open {
+    display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0;
+    background: var(--paper); border-bottom: 1px solid var(--hair); padding: 12px 20px 18px; gap: 4px;
+  }
+  .nav-links.open .nav-link { padding: 12px 14px; }
+}
+@media (max-width: 760px) {
+  body { font-size: 17px; }
+  .wrap { padding: 0 20px; }
+}
+@media (max-width: 420px) {
+  .brand .word small { display: none; }
+}
+
+/* ---------- print (toolkit) ---------- */
+@media print {
+  .nav, .tweaks-host, .no-print, .printbar { display: none !important; }
+  body { background: #fff; font-size: 12pt; }
+  .print-page { page-break-after: always; padding: 0 !important; box-shadow: none !important; border: none !important; }
+}
