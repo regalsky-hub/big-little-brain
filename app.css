@@ -342,3 +342,55 @@ a.lib-card:hover { border-color: var(--accent); transform: translateY(-2px); box
   .detail-head { grid-template-columns: auto 1fr; }
   .stage-pill { grid-column: 1 / -1; justify-self: start; }
 }
+/* ---------------- small phones (iPhone-width) ---------------- */
+@media (max-width: 480px) {
+  .wrap { padding: 0 16px; }
+
+  /* hero */
+  .hero { padding: 28px 0 12px; }
+  .hero-lede { font-size: 16.5px; margin-top: 16px; }
+  .hero-cta { gap: 10px; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+  .hero-reassure { font-size: 13.5px; }
+
+  /* brain section */
+  .brain-head p { font-size: 15px; }
+  .detail-card { padding: 18px; }
+  .detail-head h3 { font-size: 20px; }
+  .detail-plain { font-size: 18px; }
+  .brain-controls { gap: 10px; }
+
+  /* page heads */
+  .page-head { padding: 32px 0 14px; }
+  .page-head p { font-size: 16px; }
+
+  /* boxes that were too padded for a phone */
+  .types-box { padding: 22px 16px; }
+  .why-box { padding: 24px 16px; margin-bottom: 60px; }
+  .why-row p { font-size: 15px; }
+
+  /* cards */
+  .art-card, .tool-card { padding: 18px; }
+  .tool-card { flex-direction: column; }
+  .tool-card .t-ico { width: 42px; height: 42px; }
+
+  /* faq */
+  .faq-q { padding: 16px 16px; font-size: 16px; }
+  .faq-a-inner { padding: 0 16px 18px 16px; }
+  .faq-search input { font-size: 16px; padding: 15px 16px 15px 48px; }
+
+  /* reader */
+  .reader .r-body p { font-size: 17px; }
+  .keybox { padding: 18px; flex-direction: column; }
+
+  /* footer */
+  .foot-grid { flex-direction: column; gap: 24px; }
+
+  /* start-here steps */
+  .start-step { padding: 18px; flex-direction: column; gap: 10px; }
+  .ss-ico { margin-bottom: 4px; }
+
+  /* library */
+  .lib-grid { grid-template-columns: 1fr; }
+  .lib-card { padding: 16px; }
+}
