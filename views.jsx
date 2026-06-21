@@ -505,7 +505,7 @@ function AboutPage({ onHome, go }) {
         <h3 className="disc-h">Kept current</h3>
         <p>Dementia care keeps moving forward, so the content is reviewed regularly. <strong>Information last reviewed: {window.BLB.REVIEWED}.</strong> If anything reads as out of date, please tell us.</p>
         <h3 className="disc-h">Get in touch</h3>
-        <p>Spotted a mistake, or have something that helped you that others should know about? We'd love to hear it — <a className="about-mail" href="mailto:hello@biglittlebrain.com">hello@biglittlebrain.com</a>
+        <p>Spotted a mistake, or have something that helped you that others should know about? We'd love to hear it — <a className="about-mail" href="mailto:hello@biglittlebrain.com">hello@biglittlebrain.com</a>.</p>
         <div className="about-cta">
           <button className="btn" onClick={() => go("start")}>New to all this? Start here <Icon name="arrow" size={18} /></button>
           <button className="btn ghost" onClick={() => go("disclaimer")}>Read the disclaimer</button>
